@@ -11,6 +11,12 @@
     remote: origin
     dest: '{{ gitolite_user_home }}/gitolite-admin'
 
+- name: Secure the cloned gitolite-admin path
+  tags: gitolite
+  file:
+    path: '{{ gitolite_user_home }}/gitolite-admin'
+    mode: 0700
+
 # Install a gitolite repositories configuration file "gitolite.conf"
 - name: Install gitolite.conf
   tags: gitolite
