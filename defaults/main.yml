@@ -86,7 +86,7 @@ gitolite_gitoliterc_enable_features:
 # - ssh-authkeys-split
 # - partial-copy
 # - upstream
-# - cgit
+  - cgit
 # - repo-specific-hooks
 # - renice
 # - CpuTime
