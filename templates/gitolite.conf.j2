@@ -13,16 +13,18 @@
 {% endif %}
 
 {% macro gitolite_repo(r) -%}
+#######################################################################
+# Configuration for {{ r.repo }}
+#######################################################################
 repo {{ r.repo }}
 {% if 'admin' in r and r['admin']|count > 0 -%}
 {% if 'users' in r['admin'] and r['admin']['users']|count > 0 -%}
 {% set perma = "  RW+ = " + r['admin']['users']|join(" ") -%}
 {%- endif %}
-{% if perma|count > 0 -%}
+{% if perma|default("")|count > 0 %}
 {{ perma }}
+{% endif %}
 {%- endif %}
-{%- endif %}
-
 {% if 'write' in r and r['write']|count > 0 %}
 {% if 'options' in r['write'] and r['write']['options']|count > 0 and 'users' in r['write'] and r['write']['users']|count > 0 -%}
 {% set permw = "  RW " + r['write']['options']|join(" ") +  " = " + r['write']['users']|join(" ") -%}
@@ -31,11 +33,10 @@ repo {{ r.repo }}
 {% else -%}
 {% set permw = "" -%}
 {%- endif %}
-{% if permw|count > 0 -%}
+{% if permw|count > 0 %}
 {{ permw }}
+{% endif %}
 {%- endif %}
-{%- endif %}
-
 {% if 'read' in r and r['read']|count > 0 -%}
 {% if 'options' in r['read'] and r['read']['options']|count > 0 and 'users' in r['read'] and r['read']['users']|count > 0 -%}
 {% set permr = "  R " + r['write']['options']|join(" ") +  " = " + r['write']['users']|join(" ") -%}
@@ -44,9 +45,9 @@ repo {{ r.repo }}
 {% else -%}
 {% set permr = "" -%}
 {%- endif %}
-{% if permr|count > 0 -%}
+{% if permr|count > 0 %}
 {{ permr }}
-{%- endif %}
+{% endif %}
 {%- endif %}
 {%- endmacro %}
 
@@ -61,9 +62,10 @@ repo {{ r.repo }}
 {%- endfor %}
 {%- endif %}
 {%- endfor %}
-{% if create_repo -%}
+{% if create_repo %}
 {{ gitolite_repo(repo) }}
-{%- endif %}
+
+{% endif %}
 {%- endfor %}
 {%- endmacro %}
 
