@@ -57,20 +57,6 @@
     group: '{{ gitolite_user_group }}'
 
 
-- name: Fix SELinux home directory
-  tags: gitolite
-  become: true
-  with_items:
-    - { path: '{{ gitolite_user_home }}', setype: user_home_t }
-    - { path: '{{ gitolite_user_home }}/.ssh', setype: ssh_home_t }
-  file:
-    state: directory
-    path: '{{ item.path }}'
-    setype: '{{ item.setype }}'
-    owner: '{{ gitolite_user_name }}'
-    group: '{{ gitolite_user_group }}'
-
-
 # manage gitolite users' ssh configuration
 - name: Install gitolite ssh configuration
   tags: gitolite
