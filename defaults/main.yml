@@ -105,7 +105,7 @@ gitolite_gitoliterc_enable_features:
 gitolite_repositories:
   - repo: gitolite-admin
     admin:
-      users: ["id_rsa", "{{ gitolite_user_name }}"]
+      users: ["id_ed25519", "{{ gitolite_user_name }}"]
     write:
       options: []
       users: []
