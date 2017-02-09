@@ -171,9 +171,15 @@
   when:
     - '{{ (gitolite_repositories + gitolite_repositories_custom)|count != 0 }}'
 
+# store facts
+- name: Write facts
+  register: lib_registered_install_role_local_facts
+  template:
+    src: "facts.j2"
+    dest: "/usr/local/etc/ansible/facts.d/gitolite.fact"
+    mode: 0644
 
-- name: Include facts management
-  tags: gitolite
-  include: '{{ gitolite_path_to_lib_role }}/silpion.lib/tasks/localfacts.yml'
-  vars:
-    namespace: gitolite
+- name: Re-read local facts
+  when: lib_registered_install_role_local_facts.changed
+  setup:
+    filter: ansible_local
