@@ -1,6 +1,7 @@
 ---
 gitolite_supported_platform:
   - Debian
+  - FreeBSD
   - RedHat
 
 # lookup role version

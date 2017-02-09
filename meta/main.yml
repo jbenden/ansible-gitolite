@@ -32,6 +32,10 @@ galaxy_info:
     - 18
     - 19
     - 20
+  - name: FreeBSD
+    versions:
+    - all
+    - 11
   # - name: opensuse
   #   versions:
   #   - all
