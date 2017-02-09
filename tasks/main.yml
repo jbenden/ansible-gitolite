@@ -81,36 +81,6 @@
 
 
 # setup gitolite
-- name: Install gitolite directory
-  tags: gitolite
-  become: true
-  file:
-    state: directory
-    dest: '{{ gitolite_install_dir }}'
-    mode: 0755
-    owner: 0
-    group: 0
-
-- name: git clone gitolite
-  tags: gitolite
-  become: true
-  when: '{{ not gitolite_fact_initial_checkmode|default(false) }}'
-  git:
-    force: true
-    repo: '{{ gitolite_clone_url }}'
-    version: '{{ gitolite_version }}'
-    remote: github
-    dest: /usr/local/src/gitolite
-    accept_hostkey: true
-
-- name: Install gitolite
-  tags: gitolite
-  become: true
-  when: '{{ not gitolite_fact_initial_checkmode|default(false) }}'
-  command: /usr/local/src/gitolite/install -to {{ gitolite_install_dir }}
-  args:
-    creates: '{{ gitolite_install_dir }}/gitolite'
-
 - name: Install gitolite configuration
   tags: gitolite
   become: true
