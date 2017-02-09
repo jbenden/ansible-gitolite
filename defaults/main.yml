@@ -112,9 +112,6 @@ gitolite_repositories:
     read:
       options: []
       users: []
-  - repo: testing
-    admin:
-      users: ["@all"]
 
 # Custom gitolite repositories
 gitolite_repositories_custom: []
