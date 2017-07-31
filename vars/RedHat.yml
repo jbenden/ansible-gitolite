@@ -4,3 +4,5 @@ gitolite_package_list:
   - perl
   - perl-Time-HiRes
   - perl-Data-Dumper
+
+confdir: "/etc"

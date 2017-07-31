@@ -3,3 +3,5 @@ gitolite_package_list:
   - git
   - gitolite3
   - perl
+
+confdir: "/etc"

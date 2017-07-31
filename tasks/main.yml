@@ -132,7 +132,7 @@
   register: lib_registered_install_role_local_facts
   template:
     src: "facts.j2"
-    dest: "/usr/local/etc/ansible/facts.d/gitolite.fact"
+    dest: "{{confdir}}/ansible/facts.d/gitolite.fact"
     mode: 0644
 
 - name: Re-read local facts

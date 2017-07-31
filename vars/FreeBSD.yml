@@ -2,3 +2,5 @@
 gitolite_package_list:
   - git
   - gitolite
+
+confdir: "/usr/local/etc"
