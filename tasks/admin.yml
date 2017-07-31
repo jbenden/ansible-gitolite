@@ -7,7 +7,7 @@
   git:
     force: true
     accept_hostkey: true
-    repo: '{{ gitolite_user_name }}@localhost:gitolite-admin.git'
+    repo: '{{ gitolite_user_name }}@{{ansible_hostname}}:gitolite-admin.git'
     remote: origin
     dest: '{{ gitolite_user_home }}/gitolite-admin'
 
