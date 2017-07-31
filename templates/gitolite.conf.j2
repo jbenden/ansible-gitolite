@@ -53,23 +53,29 @@ repo {{ r.repo }}
 
 {% macro iter_repos(repositories) -%}
 {% for repo in repositories -%}
-{% for ace in ('admin', 'write', 'read') -%}
+{% set create_repo = True -%}
+{#
+{% for ace in ['admin', 'write', 'read'] -%}
 {% if ace in repo -%}
-{% for arg in ('options', 'users') -%}
+{% for arg in ['options', 'users'] -%}
 {% if arg in repo[ace] -%}
-{% set create_repo = true -%}
+{% set create_repo = True -%}
 {%- endif %}
 {%- endfor %}
 {%- endif %}
 {%- endfor %}
+#}
 {% if create_repo %}
 {{ gitolite_repo(repo) }}
+
+{% else %}
+## skipped {{repo.repo}}
 
 {% endif %}
 {%- endfor %}
 {%- endmacro %}
 
 # Default repositories
-{{ iter_repos(gitolite_repositories) }}
+{{ iter_repos(gitolite_repositories | default([])) }}
 # Custom repositories
 {{ iter_repos(gitolite_repositories_custom) }}
